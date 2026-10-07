@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+
+    <!-- ১. TADS SDK Script (বিজ্ঞাপনের মূল ফাইল) -->
+    <script src="https://w.tads.me/widget.js"></script>
+</head>
+<body>
+
+    <!-- আপনার অ্যাপের মূল কনটেন্ট (প্রয়োজন অনুযায়ী পরিবর্তন করতে পারেন) -->
+    <div style="text-align: center; padding: 20px;">
+        <h2>Welcome to My Mini App</h2>
+    </div>
+
+    <!-- ২. TADS Ad Container (যেখানে বিজ্ঞাপনটি দেখাবে) -->
+    <div id="tads-container-12506"></div>
+
+    <!-- ৩. TADS Ad Initialization (বিজ্ঞাপন চালু করার কোড) -->
+    <script>
+      const adsNotFoundCallback = () => {
+        console.log('No ads found to show');
+      };
+
+      const onClickRewardCallback = (adId) => {
+        console.log('Clicked ad:', adId);
+      };
+
+      // TADS উইজেট চালু করা (Widget ID: 12506)
+      const adController = window.tads.init({
+        widgetId: 12506,
+        type: 'static',
+        debug: false,
+        onClickReward: onClickRewardCallback,
+        onAdsNotFound: adsNotFoundCallback
+      });
+
+      // বিজ্ঞাপন লোড এবং প্রদর্শন
+      adController.loadAd()
+        .then(() => adController.showAd())
+        .catch((err) => {
+          console.log(err);
+          adsNotFoundCallback();
+        });
+    </script>
+</body>
+</html>
